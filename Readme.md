@@ -10,3 +10,6 @@ Component is a JS Function which allow to create smaller piece in your website, 
 Props means Properties which is sued inside Component to make it reusable
 
 Fragments (<></>) It groups elements together , without creating an extra <div>
+
+UseState() is used to refresh the HTML page whenever there is an update in data
+it will give 2 data, 1 st is the actual data and the second is the function which is use to update the data
