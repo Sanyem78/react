@@ -4,9 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
+    <style>
+        body{
+            font-family: Arial;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .send-button{
+            background-color: rgb(25,135,84);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-left: 10px;
+            border-radius: 10px;
+            font-size: large;
+            cursor: pointer;
+        }
+
+        .input-text{
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: large;
+            border-width: 1px;
+            flex-grow:1
+        }
+
+        .chat-input-container{
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .app-container{
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            /* in order to give the app height as a browser height vh is used */
+            height: 100vh;
+            display: flex;
+
+            /* flex by default put every component horizontally to fix this we use this */
+            flex-direction: column;
+        }
+
+        .chat-user-container{
+            display: flex;
+            /* justify-content moves the element horizontally */
+            justify-content: end;
+            margin-top: 10px;
+            /* align-items moves the element vertically */
+            align-items: start;
+
+        }
+
+        .chat-robot-container{
+            display: flex;
+            justify-content: left;
+            align-items: start;
+            max-width: 400px;
+        }
+
+        .chat-message{
+            background-color: rgba(238, 238, 238);
+            border-radius: 10px;
+            padding: 20px 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+
+        .user-image{
+            margin-top:15px;
+            width: 50px;
+        }
+        .robot-image{
+            margin-top:20px;
+            width: 50px;
+        }
+
+        .chat-messages{
+            flex-grow: 1;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            scrollbar-width: none;
+            /* when there will be lots of messages scroll will activate */
+            overflow: scroll;
+        }
+
+    </style>
 </head>
 <body>
     <div class="js-container"></div>
+   
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
@@ -84,8 +172,9 @@
             }
 
             return (
-                <>
+                <div className="chat-input-container">
                     <input 
+                        className="input-text"
                         placeholder="Send a message to Chatbot" 
                         size="50"
                         onChange={saveInputText}
@@ -95,42 +184,44 @@
                     <button 
                         onClick={sendMessage} 
                         disabled={isLoading}
+                        className="send-button"
                     >
                        {isLoading ? "Loading.." : "Send"}    
                     </button>
-                </>
+                    
+                </div>
             )
         }
 
-        // function ChatMessage(props){
-            // console.log(props)
-            // const {message,sender} = props;
-        function ChatMessage({message, sender}){
-            // if(sender === "robot"){
-            //     return(
-            //         <div>
-            //             <img src="static/robot.png" width="50"/>
-            //             {message}
-            //         </div>
-            //     );
-            // }
-            
+        function ChatMessage({message, sender}){            
             return(
-                <div>
+                <div className={sender === "robot"? "chat-robot-container": "chat-user-container"}>
                     {sender === "robot" && (
-                        <img width="50" src="static/robot.png"/>
+                        <img className="robot-image" src="static/robot.png"/>
                     )}
-                    {message}
+                    <div className="chat-message">{message}</div>
                     {sender === "user" && (
-                        <img width="50" src="static/user-profile.png"/>
+                        <img className="user-image" src="static/user-profile.png"/>
                     )}
                 </div>
             )
         }
 
         function ChatMessages({chatMessages}){
+
+            const chatMessagesRef = React.useRef(null);
+
+            React.useEffect(()=>{
+                
+                const containerElem = chatMessagesRef.current;
+                if(containerElem){
+                    containerElem.scrollTop = containerElem.scrollHeight;
+                }
+
+            },[chatMessages]);
+
             return(
-                <>
+                <div className="chat-messages" ref={chatMessagesRef}>
                     {
                         chatMessages.map((chatMessage)=>{
                         return (
@@ -141,7 +232,7 @@
                             />
                         );
                     })}
-                </>
+                </div>
             );
         }
 
@@ -165,15 +256,15 @@
                 }]);
 
             return (
-                <>
+                <div className="app-container">  
+                    <ChatMessages 
+                        chatMessages={chatMessages}
+                    /> 
                     <ChatInput 
                         chatMessages={chatMessages}
                         setChatMessages={setChatMessages}
                     />
-                    <ChatMessages 
-                        chatMessages={chatMessages}
-                    /> 
-                </>
+                </div>
             );
         }
 
