@@ -1,5 +1,6 @@
-import useAutoScroll from '../hooks/useAutoScroll.jsx';
-import ChatMessage from '../components/ChatMessage.jsx';
+import {useAutoScroll} from '../hooks/useAutoScroll';
+import {ChatMessage} from '../components/ChatMessage';
+import "./ChatMessages.css";
 
 function ChatMessages({chatMessages}){
     const chatMessagesRef = useAutoScroll([chatMessages]);

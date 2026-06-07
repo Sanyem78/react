@@ -1,6 +1,6 @@
 import { useRef,  useEffect} from 'react'
 
-function useAutoScroll(dependencies){
+export function useAutoScroll(dependencies){
     const containerRef = useRef(null);
 
     useEffect(()=>{
@@ -12,5 +12,3 @@ function useAutoScroll(dependencies){
     },[dependencies]);
     return containerRef;
 }
-
-export default  useAutoScroll

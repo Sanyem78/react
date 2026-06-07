@@ -1,0 +1,34 @@
+.chat-user-container{
+    display: flex;
+    /* justify-content moves the element horizontally */
+    justify-content: end;
+    margin-top: 10px;
+    /* align-items moves the element vertically */
+    align-items: start;
+
+}
+
+.chat-robot-container{
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    max-width: 400px;
+}
+
+.chat-message{
+    background-color: rgba(238, 238, 238);
+    border-radius: 10px;
+    padding: 20px 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.user-image{
+    margin-top:15px;
+    width: 50px;
+}
+.robot-image{
+    margin-top:20px;
+    width: 50px;
+}
