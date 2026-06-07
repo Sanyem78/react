@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .body{
+            font-family: Arial;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .green-button{
+            background-color: rgb(25,135,84);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            padding: 10px 10px;
+            cursor: pointer;
+     
+        }
+
+        .red-button{
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            padding: 10px 10px;
+            cursor: pointer;
+      
+        }
+       
+        .hello-para{
+            font-size: x-large;
+            font-weight: 300;
+        }
+
+ 
+
+        .email-textbox{
+            padding: 10px 15px;
+            width: 250px;
+    
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-width: 1px;
+        }
+
+        .password-textbox{
+            padding: 10px 15px;
+            width: 250px;
+    
+            border-radius: 5px;
+            border-width: 1px;
+
+        }
+
+        .input-texts{
+            display: flex;
+            flex-direction: column;
+        }
+
+ 
+
+        .login-button{
+            background-color: rgb(0,123,255);
+            color: white;
+            padding: 10px 10px;
+            border-radius: 10px;
+            border-width: 0px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-right: 5px;
+        }
+
+        .signup-button{
+            background-color: rgb(0,123,255);
+            color: white;
+            padding: 10px 10px;
+            border-radius: 10px;
+            border-width: 0px;
+            cursor: pointer;
+            margin-top: 15px;
+
+        }
+
+        .show-button{
+            width: 50px;
+            cursor: pointer;
+            padding: 5px 5px;
+            margin-left: 10px;
+        }
+
+        .counter-buttons{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: rgb(222,222,222);
+        }
+
+        .click-button{
+            background-color: rgb(25,134,85);
+            border: 0px;
+            padding: 10px 10px;
+            color: white;
+            margin-right: 10px;
+            height: 40px;
+        }
+
+        .reset-button{
+            background-color: rgb(25,134,85);
+            padding: 10px 10px;
+            border: 0px;
+            margin-right: 10px;
+            
+            color: white;
+            height: 40px;
+
+        }
+
+        .auto-button{
+            background-color: rgb(25,134,85);
+            border: 0px;
+            padding: 10px 10px;
+            margin-right: 10px;
+            color: white;
+            height: 40px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src ="https://unpkg.com/supersimpledev@8.6.4/dayjs.js"></script>
+
+    <script type="text/babel">
+        const container = document.querySelector(".js-container");
+        const root = ReactDOM.createRoot(container);
+        function GreenButton(){
+
+            const[isClicked, setIsClicked] = React.useState(false);
+            function buttonAction(){
+                if(!isClicked){
+                    setIsClicked(true);
+                }
+                else{
+                    setIsClicked(false);
+                }
+            }
+
+            return(
+                <div>
+                    <button onClick={buttonAction} className={isClicked ?"green-button":"red-button"}>{isClicked ? "ON":"OFF"}</button>
+                </div>
+            )
+        }
+
+        function WelcomePara(){
+            return(
+                <div className="hello-para-container">
+                    <p className="hello-para">Hello, Welcome to my website</p>
+                </div>
+            )
+        }
+
+        function InputTexts(){
+
+            const [showClicked, setShowClicked] = React.useState(false);
+            function showButtonAction(){
+                if(!showClicked){
+                    setShowClicked(true);
+                }
+                else{
+                    setShowClicked(false);
+                }
+            }
+            return(
+                <div className="input-texts">
+                    <input className="email-textbox" placeholder="Email"></input>
+                    <div className="password-container">
+                    <input type={showClicked ? "type": "password"} className="password-textbox" placeholder="Password"></input>
+                    <button onClick={showButtonAction} className="show-button">{showClicked ? "Hide": "Show"}</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function LoginSignUpButtons(){
+            return(
+                <div className="login-signup-buttons-container">
+                    <button className="login-button">Login</button>
+                    <button className="signup-button">Sign Up</button>
+                </div>
+            );
+        }
+
+        function CurrentTime(){
+            const [currentTime, setCurrentTime] = React.useState(dayjs().format("HH:mm:ss"));
+            React.useEffect(()=>{
+                setInterval(()=>
+                    {
+                        setCurrentTime(dayjs().format("HH:mm:ss"));
+                    },
+                1000);
+            },[])
+            return(
+                <>
+                    <p>Current Time:{currentTime}</p>
+                </>
+            );
+        }
+
+        function CounterApp(){
+            const [counter, setCounter] = React.useState(0);
+            const autoClickRef = React.useRef(null);
+
+            function clickAction(){
+                setCounter(counter+1);
+            }
+            function resetAction(){
+                setCounter(0);
+            }
+            function autoClickAction(){
+                setInterval(()=>{
+                    const containerElem = autoClickRef.current;
+                    if(containerElem){
+                        containerElem.click();
+                    }
+                    
+                },1000)
+            }
+            return(
+                <div className="counter-buttons">
+                    <button className="click-button" ref={autoClickRef} onClick={clickAction}>Clicked {counter} {counter === 0 || counter === 1 ? "time": "times"}</button>
+                    <button className="reset-button" onClick={resetAction}>Reset</button>
+                    <button className="auto-button" onClick={autoClickAction}>Auto Click</button> 
+                    
+                </div>
+            );
+        }
+ 
+        function App(){
+            return(
+                <div className="app-container">
+                    <GreenButton /> 
+                    <WelcomePara />
+                    <InputTexts />
+                    <LoginSignUpButtons />
+                    <CurrentTime />
+                    <CounterApp />
+                </div>
+            )
+        }
+        root.render(<App />)
+    </script>
+</body>
+</html>

@@ -90,6 +90,18 @@
             overflow: scroll;
         }
 
+        .default-message{
+             flex-grow: 1;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            scrollbar-width: none;
+            /* when there will be lots of messages scroll will activate */
+            overflow: scroll;
+            color:grey;
+            font-size: large;
+            margin-top: 100px;
+        }
+
     </style>
 </head>
 <body>
@@ -100,6 +112,8 @@
 
     <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
@@ -133,12 +147,14 @@
                     {
                         message: originalInputText,
                         sender: "user",
-                        id: crypto.randomUUID()
+                        id: crypto.randomUUID(),
+                        loadingStatus: false
                     },
                     {
                         message: "Loading...",
                         sender: "robot",
-                        id: tempId
+                        id: tempId,
+                        loadingStatus: true
                     }
                 ]
 
@@ -151,6 +167,7 @@
                     {
                         message: response,
                         sender: "robot",
+                        loadingStatus: false,
                         id: crypto.randomUUID()
                     }
                 ]);
@@ -193,13 +210,18 @@
             )
         }
 
-        function ChatMessage({message, sender}){            
+        function ChatMessage({message, sender, loadingStatus}){            
             return(
                 <div className={sender === "robot"? "chat-robot-container": "chat-user-container"}>
                     {sender === "robot" && (
                         <img className="robot-image" src="static/robot.png"/>
                     )}
-                    <div className="chat-message">{message}</div>
+                    <div className="chat-message">{loadingStatus? 
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                        :message}
+                    </div>
                     {sender === "user" && (
                         <img className="user-image" src="static/user-profile.png"/>
                     )}
@@ -207,28 +229,35 @@
             )
         }
 
+        function useAutoScroll(dependencies){
+                const containerRef = React.useRef(null);
+
+                React.useEffect(()=>{
+                    
+                    const containerElem = containerRef.current;
+                    if(containerElem){
+                        containerElem.scrollTop = containerElem.scrollHeight;
+                    }
+
+                },[dependencies]);
+                return containerRef;
+            }
+
         function ChatMessages({chatMessages}){
-
-            const chatMessagesRef = React.useRef(null);
-
-            React.useEffect(()=>{
-                
-                const containerElem = chatMessagesRef.current;
-                if(containerElem){
-                    containerElem.scrollTop = containerElem.scrollHeight;
-                }
-
-            },[chatMessages]);
+            
+            const chatMessagesRef = useAutoScroll([chatMessages]);
 
             return(
-                <div className="chat-messages" ref={chatMessagesRef}>
-                    {
-                        chatMessages.map((chatMessage)=>{
+                <div className={chatMessages.length === 0? "default-message": "chat-messages"} ref={chatMessagesRef}>
+                    {   chatMessages.length === 0 ? 
+                        "Welcome to the chatbot project! Send a message using the textbox below"
+                        : chatMessages.map((chatMessage)=>{
                         return (
                             <ChatMessage 
                                 message={chatMessage.message} 
                                 sender={chatMessage.sender}
                                 key={chatMessage.id}
+                                loadingStatus={chatMessage.loadingStatus}
                             />
                         );
                     })}
@@ -237,23 +266,7 @@
         }
 
         function App(){
-            const [chatMessages, setChatMessages] = React.useState([{
-                    message: "Hello Chatbot",
-                    sender: "user",
-                    id: "1"
-                },{
-                    message: "Hello User, Whatsup?",
-                    sender: "robot",
-                    id: "2"
-                },{
-                    message: "What is todays date?",
-                    sender: "user",
-                    id: "3"
-                },{
-                    message: "Todays date is 6th June 2026",
-                    sender: "robot",
-                    id: "4"
-                }]);
+            const [chatMessages, setChatMessages] = React.useState([]);
 
             return (
                 <div className="app-container">  
