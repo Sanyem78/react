@@ -132,14 +132,14 @@
             }
 
             async function sendMessage(){
-                
+
                 if(inputText === "") return;
                 if(isLoading) return;
 
                 setIsLoading(true);
                 const originalInputText = inputText;
                 setInputText("");
-
+            
                 const tempId = crypto.randomUUID();
 
                 const newChatMessages = [

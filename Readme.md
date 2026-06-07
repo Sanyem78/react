@@ -21,3 +21,8 @@ useEffect() run some code after the component is created or updated
 2. if its not null and some data is present in the array, so every time the code will run when the component is created and data is updated
 
 useRef() is used to automatically save the HTML element from the component
+
+npx create-vite
+cd cahtbot
+npm install
+npm run dev
