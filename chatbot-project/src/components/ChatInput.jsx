@@ -61,6 +61,12 @@ function ChatInput({chatMessages,setChatMessages}){
         
     }
 
+    function clearMessage(){
+        setChatMessages([]);
+        localStorage.setItem("messages",[])
+
+    }
+
     function enterAction(event){
         if(event.key === "Enter" && inputText !== ""){
             sendMessage();
@@ -86,6 +92,14 @@ function ChatInput({chatMessages,setChatMessages}){
                 className="send-button"
             >
                 {isLoading ? "Loading.." : "Send"}    
+            </button>
+
+            <button 
+                onClick={clearMessage} 
+                disabled={isLoading}
+                className="clear-button"
+            >
+                Clear    
             </button>
             
         </div>

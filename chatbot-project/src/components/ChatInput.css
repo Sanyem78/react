@@ -21,3 +21,13 @@
     display: flex;
     margin-bottom: 20px;
 }
+
+.clear-button{
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-size: large;
+}

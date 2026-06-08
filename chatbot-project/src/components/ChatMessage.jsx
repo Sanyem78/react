@@ -2,8 +2,10 @@ import userProfile from "../assets/user-profile.png";
 import robotProfile from "../assets/robot.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./ChatMessage.css"
+import dayjs from "dayjs"
 
-export function ChatMessage({message, sender, loadingStatus}){            
+export function ChatMessage({message, sender, loadingStatus}){         
+    const time = dayjs().valueOf();
     return(
         <div className={sender === "robot"? "chat-robot-container": "chat-user-container"}>
             {sender === "robot" && (
@@ -14,6 +16,7 @@ export function ChatMessage({message, sender, loadingStatus}){
                     <span className="visually-hidden">Loading...</span>
                 </div>
                 :message}
+            <div className="time-container">{dayjs(time).format("HH:mm")}</div>
             </div>
             {sender === "user" && (
                 <img className="user-image" src={userProfile}/>
