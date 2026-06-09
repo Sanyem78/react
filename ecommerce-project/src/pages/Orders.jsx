@@ -7,6 +7,7 @@ import "../index.css"
 export function Orders(){
     return (
     <>
+      <title>Orders</title>
         <Header />
 
     <div className="orders-page">
