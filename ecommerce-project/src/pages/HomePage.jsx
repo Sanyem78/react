@@ -1,18 +1,16 @@
-import {Header} from "./Header"
-import logowhite from "../assets/logo-white.png";
-import mobilelogowhite from "../assets/mobile-logo-white.png";
-import searchicon from "../assets/search-icon.png";
-import carticon from "../assets/cart-icon.png";
+import {Header} from "../components/Header"
+import homepagefavicon from "../assets/images/home-favicon.png"
 import athleticcottonsocks from "../assets/athletic-cotton-socks-6-pairs.jpg"
 import rating45 from "../assets/rating-45.png";
 import "../index.css"
 import "./HomePage.css"
-import "./header.css"
+
 export function HomePage(){
     return (
         <>
-            <Header />
+        <link rel="icon" type="image/svg+xml" href={homepagefavicon}/>
 
+            <Header />
         <div className="home-page">
         <div className="products-grid">
             <div className="product-container">

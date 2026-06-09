@@ -1,32 +1,15 @@
-import mobilelogo from "../assets/mobile-logo.png";
-import logo from "../assets/logo.png";
-import "./CheckoutHeader.css"
+import { CheckoutHeader } from "./CheckoutHeader";
+import checkoutpagefavicon from "../../assets/images/cart-favicon.png"
+
 import "./CheckoutPage.css"
-import "../index.css"
+import "../../index.css"
 export function CheckoutPage() {
   return (
     <>
+                <link rel="icon" type="image/svg+xml" href={checkoutpagefavicon}/>
+    
       <title>Checkout</title>
-      <div className="checkout-header">
-        <div className="header-content">
-          <div className="checkout-header-left-section">
-            <a href="/">
-              <img className="logo" src={logo} />
-              <img className="mobile-logo" src={mobilelogo} />
-            </a>
-          </div>
-
-          <div className="checkout-header-middle-section">
-            Checkout (<a className="return-to-home-link"
-              href="/">3 items</a>)
-          </div>
-
-          <div className="checkout-header-right-section">
-            <img src="images/icons/checkout-lock-icon.png" />
-          </div>
-        </div>
-      </div>
-
+      <CheckoutHeader />
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
 
@@ -66,7 +49,7 @@ export function CheckoutPage() {
                     Choose a delivery option:
                   </div>
                   <div className="delivery-option">
-                    <input type="radio" checked
+                    <input type="radio"
                       className="delivery-option-input"
                       name="delivery-option-1" />
                     <div>
@@ -155,7 +138,7 @@ export function CheckoutPage() {
                     </div>
                   </div>
                   <div className="delivery-option">
-                    <input type="radio" checked className="delivery-option-input"
+                    <input type="radio" className="delivery-option-input"
                       name="delivery-option-2" />
                     <div>
                       <div className="delivery-option-date">

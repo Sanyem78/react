@@ -1,12 +1,16 @@
-import {Header} from "./Header"
-import "./Orders.css"
-import "./header.css"
+import {Link} from "react-router"
+import {Header} from "../components/Header"
+import orderpagefavicon from "../assets/images/orders-favicon.png"
+
+import "./OrdersPage.css"
+import "../components/header.css"
 import "../index.css"
 
-
-export function Orders(){
+export function OrdersPage(){
     return (
     <>
+            <link rel="icon" type="image/svg+xml" href={orderpagefavicon}/>
+    
       <title>Orders</title>
         <Header />
 
@@ -56,11 +60,11 @@ export function Orders(){
             </div>
 
             <div className="product-actions">
-              <a href="tracking.html">
+              <Link to="/tracking">
                 <button className="track-package-button button-secondary">
                   Track package
                 </button>
-              </a>
+              </Link>
             </div>
 
             <div className="product-image-container">
@@ -84,11 +88,11 @@ export function Orders(){
             </div>
 
             <div className="product-actions">
-              <a href="tracking.html">
+              <Link to="/tracking">
                 <button className="track-package-button button-secondary">
                   Track package
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -135,11 +139,11 @@ export function Orders(){
             </div>
 
             <div className="product-actions">
-              <a href="tracking.html">
+              <Link to="/tracking">
                 <button className="track-package-button button-secondary">
                   Track package
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
