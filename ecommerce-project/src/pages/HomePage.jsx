@@ -49,7 +49,6 @@ export function HomePage(){
                 <img className="product-image"
                 src={athleticcottonsocks} />
             </div>
-
             <div className="product-name limit-text-to-2-lines">
                 Black and Gray Athletic Cotton Socks - 6 Pairs
             </div>
