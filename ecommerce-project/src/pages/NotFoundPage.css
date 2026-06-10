@@ -1,0 +1,11 @@
+.not-found-container{
+    height: 100vh;
+}
+
+.not-found-container h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* replace 80px with your header height */
+  margin: 0;
+}

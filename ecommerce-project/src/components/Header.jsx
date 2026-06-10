@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router';
 import logowhite from "../assets/logo-white.png";
 import mobilelogowhite from "../assets/mobile-logo-white.png";
 import searchicon from "../assets/search-icon.png";
@@ -7,13 +8,13 @@ export function Header(){
     return(
         <>
         <div className="header">
-                <div classNameName="left-section">
-                    <a href="/" className="header-link">
+                <div className="left-section">
+                    <NavLink to="/" className="header-link">
                     <img className="logo"
                         src={logowhite}/>
                     <img className="mobile-logo"
                         src={mobilelogowhite} />
-                    </a>
+                    </NavLink>
                 </div>
         
                 <div className="middle-section">
@@ -25,16 +26,16 @@ export function Header(){
                 </div>
         
                 <div className="right-section">
-                    <a className="orders-link header-link" href="orders">
+                    <NavLink className="orders-link header-link" to="/orders">
         
                     <span className="orders-text">Orders</span>
-                    </a>
+                    </NavLink>
         
-                    <a className="cart-link header-link" href="checkout">
+                    <NavLink className="cart-link header-link" to="/checkout">
                     <img className="cart-icon" src={carticon} />
                     <div className="cart-quantity">3</div>
                     <div className="cart-text">Cart</div>
-                    </a>
+                    </NavLink>
                 </div>
                 </div>
 
