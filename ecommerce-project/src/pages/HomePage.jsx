@@ -1,4 +1,6 @@
 import {Header} from "../components/Header"
+import { products } from "../data/products"
+import {Product} from "../components/Product"
 import homepagefavicon from "../assets/images/home-favicon.png"
 import athleticcottonsocks from "../assets/athletic-cotton-socks-6-pairs.jpg"
 import rating45 from "../assets/rating-45.png";
@@ -13,7 +15,7 @@ export function HomePage(){
             <Header />
         <div className="home-page">
         <div className="products-grid">
-            <div className="product-container">
+            {/* <div className="product-container">
             <div className="product-image-container">
                 <img className="product-image"
                 src={athleticcottonsocks} />
@@ -59,7 +61,7 @@ export function HomePage(){
             <button className="add-to-cart-button button-primary">
                 Add to Cart
             </button>
-            </div>
+            </div> */}
 
             <div className="product-container">
             <div className="product-image-container">
@@ -158,6 +160,18 @@ export function HomePage(){
                 Add to Cart
             </button>
             </div>
+            
+            <div>{products.map((product)=>(
+                <Product
+                    id={product.id}
+                    image={product.image}
+                    keywords = {product.keywords}
+                    name = {product.name}
+                    priceCents = {product.priceCents}
+                    rating = {product.rating}
+                />
+            ))}</div>
+
         </div>
         </div>
         </>
