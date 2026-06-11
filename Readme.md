@@ -26,3 +26,5 @@ npx create-vite
 cd cahtbot
 npm install
 npm run dev
+
+Fetch() returns a promise, it let us wait for asynchronous code to finish
