@@ -1,5 +1,5 @@
-import "./Prod"
-export function Product({id, image, keywords, name, priceCents, rating}) {
+import "./Product.css"
+export function Product({image, name, priceCents, rating}) {
     return (
         <>
             <div className="product-container">
@@ -13,14 +13,14 @@ export function Product({id, image, keywords, name, priceCents, rating}) {
 
                 <div className="product-rating-container">
                     <img className="product-rating-stars"
-                        src={rating["stars"]} />
+                        src={`images/ratings/rating-${rating["stars"]*10}`} />
                     <div className="product-rating-count link-primary">
                         {rating["count"]}
                     </div>
                 </div>
 
                 <div className="product-price">
-                    ${priceCents/100}
+                    ${(priceCents/100).toFixed(2)}
                 </div>
 
                 <div className="product-quantity-container">
