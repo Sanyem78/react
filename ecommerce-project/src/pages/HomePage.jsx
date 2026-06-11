@@ -7,7 +7,7 @@ import homepagefavicon from "../assets/images/home-favicon.png"
 import "../index.css"
 import "./HomePage.css"
 
-export function HomePage(){
+export function HomePage({cart}){
     // fetch('http://localhost:3000/api/products').then((response)=>{
     //     return response.json();
     // }).then((data)=>{
@@ -15,18 +15,19 @@ export function HomePage(){
     // });
     const [products,setProducts] = useState([])
     useEffect(()=>{
-        axios.get('http://localhost:3000/api/products')
-            .then((data)=>{
-                setProducts(data.data);
+        axios.get('/api/products')
+            .then((response)=>{
+                setProducts(response.data);
             })
-    },[products]);
+       
+    },[]);
     
     
     return (
         <>
         <link rel="icon" type="image/svg+xml" href={homepagefavicon}/>
 
-            <Header />
+            <Header cart={cart}/>
         <div className="home-page">
         <div className="products-grid">
             {products.map((product) => (

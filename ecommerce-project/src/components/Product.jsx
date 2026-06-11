@@ -1,4 +1,5 @@
 import "./Product.css"
+import { formatMoney } from "../utils/money";
 export function Product({image, name, priceCents, rating}) {
     return (
         <>
@@ -20,7 +21,7 @@ export function Product({image, name, priceCents, rating}) {
                 </div>
 
                 <div className="product-price">
-                    ${(priceCents/100).toFixed(2)}
+                    ${formatMoney(priceCents)}
                 </div>
 
                 <div className="product-quantity-container">

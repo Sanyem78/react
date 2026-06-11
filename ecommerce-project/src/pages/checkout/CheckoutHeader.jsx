@@ -3,7 +3,8 @@ import mobilelogo from "../../assets/mobile-logo.png";
 import logo from "../../assets/logo.png";
 import "./CheckoutHeader.css"
 
-export function CheckoutHeader(){
+export function CheckoutHeader({quantity}){
+  
     return(<div className="checkout-header">
         <div className="header-content">
           <div className="checkout-header-left-section">
@@ -15,7 +16,7 @@ export function CheckoutHeader(){
 
           <div className="checkout-header-middle-section">
             Checkout (<Link className="return-to-home-link"
-              to="/">3 items</Link>)
+              to="/">{quantity} items</Link>)
           </div>
 
           <div className="checkout-header-right-section">
