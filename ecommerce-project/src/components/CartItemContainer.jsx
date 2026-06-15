@@ -1,11 +1,27 @@
 import "./CartItemContainer.css"
-export function CartItemContainer({productName, price, quantity, imageUrl}){
-   
-    return(
+import axios from "axios"
+import {useState,useEffect} from "react"
+import {getAddedDate, getAddedDay, getAddedMonth} from "../utils/days"
+import {DeliveryOption} from "./DeliveryOption"
+export function CartItemContainer({productName, price, quantity, imageUrl, productId, deliveryOptionId}){
+   const [deliveryOptions, setDeliveryOptions] = useState([]);
+   useEffect(()=>{
+      axios.get("/api/delivery-options")
+        .then((response)=>{
+          setDeliveryOptions(response.data)
+        })
+   },[])
+   const selectedDeliveryOption = deliveryOptions
+        .find((deliveryOption)=>{
+          return deliveryOption.id===deliveryOptionId
+        })
+    const deliveryDays = selectedDeliveryOption?.deliveryDays
+        console.log(deliveryDays) 
+    return( 
         <>
         <div className="cart-item-container">
               <div className="delivery-date">
-                Delivery date: Tuesday, June 21
+                Delivery date: {getAddedDay(deliveryDays)}, {getAddedMonth(deliveryDays)} {getAddedDate(deliveryDays)}
               </div>
 
               <div className="cart-item-details-grid">
@@ -36,13 +52,24 @@ export function CartItemContainer({productName, price, quantity, imageUrl}){
                   <div className="delivery-options-title">
                     Choose a delivery option:
                   </div>
-                  <div className="delivery-option">
+                  {deliveryOptions.map((deliveryOption)=>(
+                       <DeliveryOption 
+                          key={deliveryOption.id}
+                          id={deliveryOption.id}
+                          productId={productId}
+                          deliveryDays={deliveryOption.deliveryDays} 
+                          cost={deliveryOption.priceCents}
+                          deliveryOptionId={deliveryOptionId}
+                        />
+                  ))}
+                 
+                  {/* <div className="delivery-option">
                     <input type="radio"
                       className="delivery-option-input"
                       name="delivery-option-1" />
                     <div>
                       <div className="delivery-option-date">
-                        Tuesday, June 21
+                        {getAddedDay(7)}, {getAddedMonth(7)} {getAddedDate(7)}
                       </div>
                       <div className="delivery-option-price">
                         FREE Shipping
@@ -74,7 +101,7 @@ export function CartItemContainer({productName, price, quantity, imageUrl}){
                         $9.99 - Shipping
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

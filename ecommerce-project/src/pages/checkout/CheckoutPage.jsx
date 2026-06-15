@@ -9,12 +9,10 @@ export function CheckoutPage({cart}) {
    let totalQuantity = 0;
     cart.forEach(cartItem => {
         totalQuantity +=cartItem.quantity;
-    });
-    
-    console.log(cart);
+    }); 
   return (
     <>
-                <link rel="icon" type="image/svg+xml" href={checkoutpagefavicon}/>
+      <link rel="icon" type="image/svg+xml" href={checkoutpagefavicon}/>
     
       <title>Checkout</title>
       <CheckoutHeader quantity={totalQuantity}/>
@@ -25,12 +23,15 @@ export function CheckoutPage({cart}) {
           <div className="order-summary">
             {
               cart.map((cartItem)=>{
+                
                 return( <CartItemContainer 
                   key={cartItem.productId}
                   productName={cartItem.product.name}
                   price={formatMoney(cartItem.product.priceCents)}
-                  quantity={cartItem.product.quantity}
+                  quantity={cartItem.quantity}
                   imageUrl={cartItem.product.image}
+                  productId={cartItem.productId}
+                  deliveryOptionId={cartItem.deliveryOptionId}
                 />  )
                
               })}
