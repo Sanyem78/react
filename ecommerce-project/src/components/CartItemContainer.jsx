@@ -3,7 +3,7 @@ import axios from "axios"
 import {useState,useEffect} from "react"
 import {getAddedDate, getAddedDay, getAddedMonth} from "../utils/days"
 import {DeliveryOption} from "./DeliveryOption"
-export function CartItemContainer({productName, price, quantity, imageUrl, productId, deliveryOptionId}){
+export function CartItemContainer({productName, price, quantity, imageUrl, productId, deliveryOptionId, loadCart}){
    const [deliveryOptions, setDeliveryOptions] = useState([]);
    useEffect(()=>{
       axios.get("/api/delivery-options")
@@ -60,48 +60,12 @@ export function CartItemContainer({productName, price, quantity, imageUrl, produ
                           deliveryDays={deliveryOption.deliveryDays} 
                           cost={deliveryOption.priceCents}
                           deliveryOptionId={deliveryOptionId}
+                          deliveryOptions={deliveryOptions}
+                          loadCart={loadCart}
                         />
                   ))}
                  
-                  {/* <div className="delivery-option">
-                    <input type="radio"
-                      className="delivery-option-input"
-                      name="delivery-option-1" />
-                    <div>
-                      <div className="delivery-option-date">
-                        {getAddedDay(7)}, {getAddedMonth(7)} {getAddedDate(7)}
-                      </div>
-                      <div className="delivery-option-price">
-                        FREE Shipping
-                      </div>
-                    </div>
-                  </div>
-                  <div className="delivery-option">
-                    <input type="radio"
-                      className="delivery-option-input"
-                      name="delivery-option-1" />
-                    <div>
-                      <div className="delivery-option-date">
-                        Wednesday, June 15
-                      </div>
-                      <div className="delivery-option-price">
-                        $4.99 - Shipping
-                      </div>
-                    </div>
-                  </div>
-                  <div className="delivery-option">
-                    <input type="radio"
-                      className="delivery-option-input"
-                      name="delivery-option-1" />
-                    <div>
-                      <div className="delivery-option-date">
-                        Monday, June 13
-                      </div>
-                      <div className="delivery-option-price">
-                        $9.99 - Shipping
-                      </div>
-                    </div>
-                  </div> */}
+                   
                 </div>
               </div>
             </div>

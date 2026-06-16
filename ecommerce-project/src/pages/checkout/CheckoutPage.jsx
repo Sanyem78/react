@@ -5,7 +5,7 @@ import checkoutpagefavicon from "../../assets/images/cart-favicon.png"
 
 import "./CheckoutPage.css"
 import "../../index.css"
-export function CheckoutPage({cart}) {
+export function CheckoutPage({cart, loadCart}) {
    let totalQuantity = 0;
     cart.forEach(cartItem => {
         totalQuantity +=cartItem.quantity;
@@ -32,6 +32,7 @@ export function CheckoutPage({cart}) {
                   imageUrl={cartItem.product.image}
                   productId={cartItem.productId}
                   deliveryOptionId={cartItem.deliveryOptionId}
+                  loadCart={loadCart}
                 />  )
                
               })}
