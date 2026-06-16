@@ -18,7 +18,6 @@ export function PaymentSummary() {
         })
     }
 
-    console.log(paymentSummary)
     return (
 
         <>

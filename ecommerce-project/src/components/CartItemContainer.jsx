@@ -16,7 +16,7 @@ export function CartItemContainer({productName, price, quantity, imageUrl, produ
           return deliveryOption.id===deliveryOptionId
         })
     const deliveryDays = selectedDeliveryOption?.deliveryDays
-        console.log(deliveryDays) 
+   
     return( 
         <>
         <div className="cart-item-container">

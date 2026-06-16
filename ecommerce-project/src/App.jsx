@@ -22,7 +22,7 @@ function App() {
     useEffect(()=>{
       loadCart()
     },[])
-    console.log(cart)
+    
   return (
     <>
     <Routes>
