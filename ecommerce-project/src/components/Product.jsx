@@ -14,7 +14,7 @@ export function Product({image, name, priceCents, rating}) {
 
                 <div className="product-rating-container">
                     <img className="product-rating-stars"
-                        src={`images/ratings/rating-${rating["stars"]*10}`} />
+                        src={`images/ratings/rating-${rating["stars"]*10}.png`} />
                     <div className="product-rating-count link-primary">
                         {rating["count"]}
                     </div>

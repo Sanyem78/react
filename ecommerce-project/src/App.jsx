@@ -10,20 +10,26 @@ import { NotFoundPage } from "./pages/NotFoundPage"
 
 function App() {
     const [cart,setCart] = useState([])
+
+    const loadCart = async()=>{
+       
+      await axios.get("/api/cart-items?expand=product")
+        .then((response)=>{
+            setCart(response.data)
+        })
+    }
+
     useEffect(()=>{
-      axios.get("/api/cart-items?expand=product")
-            .then((response)=>{
-                setCart(response.data)
-            })
+      loadCart()
     },[])
-     
+    
   return (
     <>
     <Routes>
       {/* <Route path="/" element={<HomePage />} /> */}
       <Route index element={<HomePage cart={cart}/>}/>
-      <Route path="checkout" element={<CheckoutPage cart={cart}/>} />
-      <Route path="orders" element={<OrdersPage />} />
+      <Route path="checkout" element={<CheckoutPage cart={cart} loadCart={loadCart}/>} />
+      <Route path="orders" element={<OrdersPage cart={cart}/>} />
       <Route path="tracking" element={<TrackingPage />} />
       <Route path="*" element={<NotFoundPage />} />
 

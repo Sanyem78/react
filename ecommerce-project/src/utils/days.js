@@ -19,3 +19,10 @@ export function getAddedMonth(deliverDays){
     date.setDate(date.getDate() + deliverDays);
     return date.toLocaleString('default', { month: 'long' })
 }
+
+export function formatEpoch(epoch) {
+     return new Date(epoch).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric'
+    });
+}
